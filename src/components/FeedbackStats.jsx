@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 
 function FeedbackStats({ feedback }) {
@@ -7,6 +8,8 @@ function FeedbackStats({ feedback }) {
       return acc + cur.rating;
     }, 0) / feedback.length;
 
+  average = average.toFixed(1).replace(/[.,]0$/, ""); //replaces ones ending with .0 to just the whole number, i.e 8.0 to 8
+
   return (
     <div className="feedback-stats">
       <h4>{feedback.length} Reviews</h4>
@@ -14,5 +17,9 @@ function FeedbackStats({ feedback }) {
     </div>
   );
 }
+
+FeedbackStats.propTypes = {
+  feedback: PropTypes.array.isRequired,
+};
 
 export default FeedbackStats;
