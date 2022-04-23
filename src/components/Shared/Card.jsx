@@ -21,7 +21,7 @@ function Card({ children, reverse }) {
 }
 
 Card.defaultProps = {
-  reverse: true, //incase you dont pass in reverse prop in line 6 of 'FeedbackItem.jsx'
+  reverse: false, //incase you dont pass in reverse prop in line 6 of 'FeedbackItem.jsx'
 };
 
 export default Card;
