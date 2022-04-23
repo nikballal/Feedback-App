@@ -3,7 +3,7 @@ import Card from "./Shared/Card";
 import Button from "./Shared/Button";
 import RatingSelect from "./RatingSelect";
 
-function FeedbackForm() {
+function FeedbackForm({ handleAdd }) {
   const [text, setText] = useState("");
   const [rating, setRating] = useState(10); //'rating' state
   const [btnDisabled, setBtnDisabled] = useState(true); //set character limit by using button disabling
@@ -26,9 +26,25 @@ function FeedbackForm() {
     e.preventDefault();
   }
 
+  const handleSubmit = (e) => {
+    //check the condition
+    if (text.trim().length > 10) {
+      //build a constructor
+      const newFeedback = {
+        text: text,
+        rating: rating,
+      };
+
+      handleAdd(newFeedback); //called in App.jsx
+
+      setText(""); //clear out the input fields
+    }
+    e.preventDefault();
+  };
+
   return (
     <Card>
-      <form>
+      <form onSubmit={handleSubmit}>
         <h2>How would you rate your service with us?</h2>
         <RatingSelect
           select={(rating) => {

@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "uuid"; //run npm i uuid on command line, this generates unique key for our feedback items
 import { useState } from "react";
 import Header from "./components/Header";
 // import FeedbackItem from "./components/FeedbackItem";
@@ -16,11 +17,16 @@ function App() {
     }
   };
 
+  const addFeedback = (newFeedback) => {
+    newFeedback.ud = uuidv4();
+    setFeedback([newFeedback, ...feedback]); //store it inside an array, since setFeedback is mutable.
+  };
+
   return (
     <>
       <Header />
       <div className="container">
-        <FeedbackForm />
+        <FeedbackForm handleAdd={addFeedback} />
         <FeedbackStats feedback={feedback} />
         <FeedbackList feedback={feedback} handleDelete={deleteFeedback} />
       </div>
