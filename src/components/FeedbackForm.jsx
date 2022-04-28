@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Card from "./Shared/Card";
 import Button from "./Shared/Button";
 import RatingSelect from "./RatingSelect";
+import FeedbackContext from "../context/FeedbackContext";
 
-function FeedbackForm({ handleAdd }) {
+function FeedbackForm() {
   const [text, setText] = useState("");
   const [rating, setRating] = useState(10); //'rating' state
   const [btnDisabled, setBtnDisabled] = useState(true); //set character limit by using button disabling
   const [message, setMessage] = useState(""); //set character limit
+
+  //adding useContext
+  const { addFeedback } = useContext(FeedbackContext);
 
   function handleTextChange(e) {
     //setting character limit in the input field
@@ -35,7 +39,7 @@ function FeedbackForm({ handleAdd }) {
         rating: rating,
       };
 
-      handleAdd(newFeedback); //called in App.jsx
+      addFeedback(newFeedback); //called in App.jsx
 
       setText(""); //clear out the input fields
     }

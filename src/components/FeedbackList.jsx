@@ -5,7 +5,8 @@ import FeedbackItem from "./FeedbackItem";
 import FeedbackContext from "../context/FeedbackContext";
 
 //'feedback' removed from prop, and inserted useContext
-function FeedbackList({ handleDelete }) {
+function FeedbackList() {
+  //handleDelete removed from prop
   const { feedback } = useContext(FeedbackContext);
 
   if (!feedback || feedback.length === 0) {
@@ -24,7 +25,7 @@ function FeedbackList({ handleDelete }) {
               <FeedbackItem
                 key={index}
                 eachItem={item}
-                handleDelete={handleDelete} //passing over to app.jsx
+                // handleDelete={handleDelete} //passing over to app.jsx
               />
             </motion.div>
           ))}

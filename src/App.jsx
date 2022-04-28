@@ -1,31 +1,16 @@
-import { v4 as uuidv4 } from "uuid"; //run npm i uuid on command line, this generates unique key for our feedback items
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; //you can avoid using /#about, instead use /about in the url
-import { useState } from "react";
+// import { useState } from "react";
 import Header from "./components/Header";
 // import FeedbackItem from "./components/FeedbackItem";
 import FeedbackList from "./components/FeedbackList";
 import FeedbackStats from "./components/FeedbackStats";
 import FeedbackForm from "./components/FeedbackForm";
-import FeedbackData from "./data/FeedbackData";
+// import FeedbackData from "./data/FeedbackData";
 import AboutPage from "./pages/AboutPage";
 import { FeedbackProvider } from "./context/FeedbackContext";
 import AboutIconLink from "./components/AboutIconLink";
 
 function App() {
-  const [feedback, setFeedback] = useState(FeedbackData);
-
-  const deleteFeedback = (id) => {
-    console.log(feedback);
-    if (window.confirm("Are you sure you want to delete?")) {
-      setFeedback(feedback.filter((item) => item.id !== id));
-    }
-  };
-
-  const addFeedback = (newFeedback) => {
-    newFeedback.ud = uuidv4();
-    setFeedback([newFeedback, ...feedback]); //store it inside an array, since setFeedback is mutable.
-  };
-
   return (
     <FeedbackProvider>
       <Router>
@@ -38,10 +23,10 @@ function App() {
               path="/"
               element={
                 <>
-                  <FeedbackForm handleAdd={addFeedback} />
+                  <FeedbackForm />
                   <FeedbackStats />
                   {/* prop feedback={feedback} removed from FeedbackStats*/}
-                  <FeedbackList handleDelete={deleteFeedback} />
+                  <FeedbackList />
                   {/* prop feedback={feedback} removed from FeedbackList*/}
                 </>
               }
