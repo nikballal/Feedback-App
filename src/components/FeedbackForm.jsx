@@ -11,7 +11,8 @@ function FeedbackForm() {
   const [message, setMessage] = useState(""); //set character limit
 
   //adding useContext
-  const { addFeedback, feedbackEdit } = useContext(FeedbackContext);
+  const { addFeedback, feedbackEdit, updateFeedback } =
+    useContext(FeedbackContext);
 
   useEffect(() => {
     if (feedbackEdit.edit === true) {
@@ -47,7 +48,11 @@ function FeedbackForm() {
         rating: rating,
       };
 
-      addFeedback(newFeedback); //called in App.jsx
+      if (feedbackEdit.edit === true) {
+        updateFeedback(feedbackEdit.item.id, newFeedback);
+      } else {
+        addFeedback(newFeedback); //called in App.jsx
+      }
 
       setText(""); //clear out the input fields
     }
