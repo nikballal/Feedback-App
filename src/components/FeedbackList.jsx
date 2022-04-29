@@ -3,16 +3,19 @@ import { useContext } from "react";
 import React from "react";
 import FeedbackItem from "./FeedbackItem";
 import FeedbackContext from "../context/FeedbackContext";
+import Spinner from "./Shared/Spinner";
 
 //'feedback' removed from prop, and inserted useContext
 function FeedbackList() {
   //handleDelete removed from prop
-  const { feedback } = useContext(FeedbackContext);
+  const { feedback, isLoading } = useContext(FeedbackContext);
 
-  if (!feedback || feedback.length === 0) {
-    return "No Feedback Yet";
+  if (!isLoading && (!feedback || feedback.length === 0)) {
+    return <p>No Feedback Yet</p>;
   } else {
-    return (
+    return isLoading ? (
+      <Spinner />
+    ) : (
       <div className="container">
         <AnimatePresence>
           {feedback.map((item, index) => (
